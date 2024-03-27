@@ -43,12 +43,11 @@ void publish() {
   
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
-  mqttClient.publish("m5stamp-c3", jsonBuffer);
+  mqttClient.publish("iot-button/notify-to-line", jsonBuffer);
 }
 
 void setup() {
   Serial.begin(115200);
-  esp_deep_sleep_enable_gpio_wakeup(BIT(3), ESP_GPIO_WAKEUP_GPIO_LOW);
   led.show(10, 10, 0);
 
   bool ret = connect();
@@ -61,6 +60,8 @@ void setup() {
 
   delay(1000);
   led.clear();
+
+  esp_deep_sleep_enable_gpio_wakeup(BIT(3), ESP_GPIO_WAKEUP_GPIO_LOW);
   esp_deep_sleep_start();
 }
 
