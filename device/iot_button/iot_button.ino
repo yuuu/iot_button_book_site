@@ -18,8 +18,14 @@ void deepSleep() {
   esp_deep_sleep_start();
 }
 
+bool buttonPressed() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  int button = digitalRead(BUTTON_PIN);
+  return button == LOW;
+}
+
 void waitForButtonRelease() {
-  while(digitalRead(BUTTON_PIN) == LOW) {
+  while(buttonPressed()) {
     delay(100);
   }
 }
@@ -30,58 +36,36 @@ bool connect() {
 
   //wifiManager.startConfigPortal(apName);
   wifiManager.autoConnect(apName, AP_PASSWORD);
-  Serial.println("Connected to Wi-Fi.");
-
   wifiClient.setCACert(AWS_CERT_CA);
   wifiClient.setCertificate(AWS_CERT_CRT);
   wifiClient.setPrivateKey(AWS_CERT_PRIVATE);
   mqttClient.begin(AWS_IOT_ENDPOINT, 8883, wifiClient);
-  
-  for (int retry = 0 ; retry < 3 ; retry++) {
-    mqttClient.connect(THINGNAME);
-    if (mqttClient.connected()) {
-      break;
-    }
-    Serial.print(".");
-    delay(5000);
-  }
-  Serial.println("Connected to MQTT Broker.");
-
-  return true;
+  mqttClient.connect(THINGNAME);
+  return mqttClient.connected();
 }
 
-void publish() {
+bool publish() {
   StaticJsonDocument<200> doc;
   doc["device"] = chipId;
   doc["time"] = millis();
   
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
-  mqttClient.publish("iot-button/notify-to-line", jsonBuffer);
-  Serial.println("Published to MQTT Broker.");
+  return mqttClient.publish("iot-button/notify-to-line", jsonBuffer);
 }
 
 void setup() {
   Serial.begin(115200);
   Serial.println("Start to IoT Button.");
 
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
-  int button = digitalRead(BUTTON_PIN);
-  if (button == HIGH) {
+  if (!buttonPressed()) {
     deepSleep();
     return;
   }
 
   led.show(10, 10, 0);
 
-  bool ret = connect();
-  if (!ret) {
-    led.show(10, 0, 0);
-  } else {
-    publish();
-    led.show(0, 0, 10);
-  }
-
+  (connect() && publish()) ? led.show(0, 0, 10) : led.show(10, 0, 0);
   delay(1000);
   led.clear();
   waitForButtonRelease();
