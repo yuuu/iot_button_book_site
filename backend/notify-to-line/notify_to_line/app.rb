@@ -18,7 +18,5 @@ end
 def lambda_handler(event:, context:)
   logger.debug(event)
   logger.debug(context)
-
-  puts event
-  # client.broadcast({ type: 'text', text: "#{event['']}" })
+  client.broadcast({ type: 'text', text: "IoTボタンが押されました\n(ID: #{event['device']})" })
 end
