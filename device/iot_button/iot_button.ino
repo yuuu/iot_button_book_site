@@ -51,7 +51,7 @@ bool publish() {
   
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
-  return mqttClient.publish("iot-button/notify-to-line", jsonBuffer);
+  return mqttClient.publish("iot-button/control-switchbot", jsonBuffer);
 }
 
 void setup() {

@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  control-switchbot
+
+  Sample SAM Template for controll-switchbot
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Parameters:
+  SwitchbotToken:
+    Type: String
+    Description: Switchbot API Token
+  SwitchbotSecret:
+    Type: String
+    Description: Switchbot API Secret
+  SwitchbotDeviceId:
+    Type: String
+    Description: Switchbot Device ID
+
+Resources:
+  ControlSwitchbotFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: control_switchbot/
+      Handler: app.lambda_handler
+      Runtime: ruby3.2
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          SWITCHBOT_TOKEN: !Ref SwitchbotToken
+          SWITCHBOT_SECRET: !Ref SwitchbotSecret
+          SWITCHBOT_DEVICE_ID: !Ref SwitchbotDeviceId
+      Events:
+        IoT:
+          Type: IoTRule
+          Properties:
+            Sql: SELECT device, time, clientid() AS client_id  FROM 'iot-button/control-switchbot'
+
+Outputs:
+  ControlSwitchbotFunction:
+    Description: "Control Switchbot Lambda Function ARN"
+    Value: !GetAtt ControlSwitchbotFunction.Arn
+  HelloWorldFunctionIamRole:
+    Description: "Implicit IAM Role created for Control Switchbot function"
+    Value: !GetAtt ControlSwitchbotFunctionRole.Arn
