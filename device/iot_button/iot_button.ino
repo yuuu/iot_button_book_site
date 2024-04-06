@@ -34,13 +34,16 @@ bool connect() {
   char apName[64] = {0};
   sprintf(apName, "%s-%04X", AP_NAME_PREFIX, chipId);
 
+  // 強制的にWi-Fi設定画面を表示する場合はコメントアウトを外す
   //wifiManager.startConfigPortal(apName);
   wifiManager.autoConnect(apName, AP_PASSWORD);
+
   wifiClient.setCACert(AWS_CERT_CA);
   wifiClient.setCertificate(AWS_CERT_CRT);
   wifiClient.setPrivateKey(AWS_CERT_PRIVATE);
   mqttClient.begin(AWS_IOT_ENDPOINT, 8883, wifiClient);
   mqttClient.connect(THINGNAME);
+
   return mqttClient.connected();
 }
 
@@ -64,12 +67,11 @@ void setup() {
   }
 
   led.show(10, 10, 0);
-
   (connect() && publish()) ? led.show(0, 0, 10) : led.show(10, 0, 0);
   delay(1000);
+
   led.clear();
   waitForButtonRelease();
-
   Serial.println("End to IoT Button.");
   deepSleep();
 }
