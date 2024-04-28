@@ -40,7 +40,7 @@ Resources:
           Properties:
             Sql: SELECT device, time, clientid() AS client_id  FROM 'iot-button/control-switchbot'
     Metadata:
-      DockerTag: ruby3.2-v1
+      DockerTag: ruby3.3-v1
       DockerContext: ./control_switchbot
       Dockerfile: Dockerfile
 

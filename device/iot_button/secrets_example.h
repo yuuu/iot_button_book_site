@@ -5,6 +5,7 @@ const char AP_PASSWORD[] = "IoTButton1234!";
 
 const char THINGNAME[] = "IoTButton-1";
 const char AWS_IOT_ENDPOINT[] = "xxxxxxxxxxxxxx-ats.iot.ap-northeast-1.amazonaws.com";
+const char AWS_IOT_TOPIC[] = "iot-button/notify-to-line";
 
 // Amazon Root CA 1
 static const char AWS_CERT_CA[] PROGMEM = R"EOF(

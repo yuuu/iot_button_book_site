@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'httparty'
+gem 'switchbot'
 
 group :test do
   gem 'mocha'

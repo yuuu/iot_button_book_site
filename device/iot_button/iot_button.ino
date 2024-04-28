@@ -25,13 +25,13 @@ bool buttonPressed() {
 }
 
 void waitForButtonRelease() {
-  while(buttonPressed()) {
+  while (buttonPressed()) {
     delay(100);
   }
 }
 
 bool connect() {
-  char apName[64] = {0};
+  char apName[64] = { 0 };
   sprintf(apName, "%s-%04X", AP_NAME_PREFIX, chipId);
 
   // 強制的にWi-Fi設定画面を表示する場合はコメントアウトを外す
@@ -51,10 +51,10 @@ bool publish() {
   StaticJsonDocument<200> doc;
   doc["device"] = chipId;
   doc["time"] = millis();
-  
+
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
-  return mqttClient.publish("iot-button/control-switchbot", jsonBuffer);
+  return mqttClient.publish(AWS_IOT_TOPIC, jsonBuffer);
 }
 
 void setup() {

@@ -24,7 +24,7 @@ Resources:
     Properties:
       CodeUri: notify_to_line/
       Handler: app.lambda_handler
-      Runtime: ruby3.2
+      Runtime: ruby3.3
       Architectures:
         - x86_64
       Environment:

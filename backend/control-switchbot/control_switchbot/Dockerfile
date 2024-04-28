@@ -1,6 +1,6 @@
-FROM public.ecr.aws/lambda/ruby:3.2
+FROM public.ecr.aws/lambda/ruby:3.3
 
-RUN yum -y install gcc make
+RUN dnf -y install gcc make
 
 COPY app.rb Gemfile ./
 
