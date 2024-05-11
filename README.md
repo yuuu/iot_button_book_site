@@ -12,15 +12,15 @@
 
 ### backend/notify-to-line
 
-![2章 LINEに通知する AWS構成図](https://github.com/yuuu/iot_button_book_site/assets/8074640/30faa68f-1447-423c-97d6-cdd75bdbf853)
-
 「2章 LINEに通知する」で構築するIoTバックエンドのプログラムです。
+
+![2章 LINEに通知する AWS構成図](https://github.com/yuuu/iot_button_book_site/assets/8074640/30faa68f-1447-423c-97d6-cdd75bdbf853)
 
 ### backend/control-switchbot
 
-![3章 家電を操作する AWS構成図](https://github.com/yuuu/iot_button_book_site/assets/8074640/65510985-c941-4759-aa17-39a3d8058ca7)
-
 「3章 家電を操作する」で構築するIoTバックエンドのプログラムです。
+
+![3章 家電を操作する AWS構成図](https://github.com/yuuu/iot_button_book_site/assets/8074640/65510985-c941-4759-aa17-39a3d8058ca7)
 
 ## 正誤表
 
@@ -28,7 +28,7 @@
 
 ## 指摘・質問がある場合
 
-[本リポジトリのIssues](https://github.com/yuuu/iot_button_book_site)に書き込みをお願いいたします。
+[本リポジトリのIssues](https://github.com/yuuu/iot_button_book_site/issues)に書き込みをお願いいたします。
 
 ## 画像素材
 
