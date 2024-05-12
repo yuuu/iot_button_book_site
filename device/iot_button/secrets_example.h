@@ -4,10 +4,12 @@ const char AP_NAME_PREFIX[] = "IoTButton";
 const char AP_PASSWORD[] = "IoTButton1234!";
 
 const char THINGNAME[] = "IoTButton-1";
+
+// AWS IoT Coreのエンドポイントを転記します
 const char AWS_IOT_ENDPOINT[] = "xxxxxxxxxxxxxx-ats.iot.ap-northeast-1.amazonaws.com";
 const char AWS_IOT_TOPIC[] = "iot-button/notify-to-line";
 
-// Amazon Root CA 1
+// ルートCA証明書ファイルの内容を転記します
 static const char AWS_CERT_CA[] PROGMEM = R"EOF(
 -----BEGIN CERTIFICATE-----
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -31,7 +33,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 -----END CERTIFICATE-----
 )EOF";
 
-// Device Certificate
+// デバイス証明書ファイルの内容を転記します
 static const char AWS_CERT_CRT[] PROGMEM = R"KEY(
 -----BEGIN CERTIFICATE-----
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -55,7 +57,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 -----END CERTIFICATE-----
 )KEY";
 
-// Device Private Key
+// プライベートキーファイルの内容を転記します
 static const char AWS_CERT_PRIVATE[] PROGMEM = R"KEY(
 -----BEGIN RSA PRIVATE KEY-----
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

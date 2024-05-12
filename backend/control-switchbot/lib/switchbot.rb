@@ -10,6 +10,6 @@ puts
 
 client = Switchbot::Client.new(token, secret_key)
 res = client.devices
-res.dig(:body, :device_list).each do |device|
-  puts "Device: #{device[:device_name]} (#{device[:device_id]})"
+res.dig(:body, :infrared_remote_list).each do |device|
+  puts "Infrared Remote: #{device[:device_name]} (#{device[:device_id]})"
 end
